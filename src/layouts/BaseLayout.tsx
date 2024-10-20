@@ -69,11 +69,6 @@ const BaseLayout = ({ children }: any) => {
                     className="h-20 lg:w-[14rem] rounded-xl object-cover"
                   />
                 </div>
-
-                <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500 lg:text-left dark:text-gray-400">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Incidunt consequuntur amet culpa cum itaque neque.
-                </p>
               </div>
 
               <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
