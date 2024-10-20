@@ -23,6 +23,7 @@ const Index = () => {
       setLoading(false);
     }, 1500);
   };
+
   const fetchNowPlaying = async () => {
     setLoadingNowPlaying(true);
     const resNowPlaying: any = await getNowPlayingMovie();

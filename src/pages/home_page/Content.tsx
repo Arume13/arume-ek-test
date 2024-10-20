@@ -1,7 +1,10 @@
+import { StarIcon } from "lucide-react";
 import HeroCarousel from "./_components/HeroCarousel";
 import useLogic from "./_logic";
+import { useNavigate } from "react-router-dom";
 
 const Content = () => {
+  const navigate = useNavigate();
   const {
     setPopularPage,
     popularPage,
@@ -23,11 +26,6 @@ const Content = () => {
               <h1 className="text-2xl font-bold text-gray-200 sm:text-3xl dark:text-white">
                 Now Playing Movie
               </h1>
-
-              <p className="mt-1.5 text-sm text-gray-400 dark:text-gray-400">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure,
-                recusandae.
-              </p>
             </div>
           </div>
         </div>
@@ -50,21 +48,47 @@ const Content = () => {
         {nowPlaying?.length > 0
           ? nowPlaying.map((item: any, key: any) => {
               return (
-                <div className="group" key={key}>
+                <div
+                  className="group"
+                  key={key}
+                  onClick={() =>
+                    navigate(
+                      `/movie/${item?.release_date?.split("-")[0]}/${
+                        item?.id
+                      }/detail`
+                    )
+                  }
+                >
                   <img
                     alt=""
                     src={`${import.meta.env.VITE_TMDB_IMG_URL}/${
-                      item.backdrop_path
+                      item.poster_path
                     }`}
-                    className="h-80 object-fit mx-auto lg:w-[14rem] rounded-xl object-cover shadow-xl transition group-hover:grayscale-[0%] hover:scale-110 ease-in duration-200 dark:shadow-gray-700/25"
+                    className="h-90 object-fit mx-auto lg:w-[17rem] rounded-xl object-cover shadow-xl transition group-hover:grayscale-[0%] hover:scale-110 ease-in duration-200 dark:shadow-gray-700/25"
                   />
 
                   <div className="p-4">
-                    <a href="#">
-                      <h3 className="text-lg font-medium text-gray-200 dark:text-white">
-                        {item?.title}
-                      </h3>
-                    </a>
+                    <h3 className="flex justify-between text-lg font-medium text-gray-200 dark:text-white">
+                      {item?.title}
+
+                      <span className="inline-flex items-center justify-center rounded-full bg-amber-100 px-2 py-0.5 text-amber-700">
+                        <StarIcon size={18} fill="brown" />
+                        {/* <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className=" size-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M8.25 9.75h4.875a2.625 2.625 0 010 5.25H12M8.25 9.75L10.5 7.5M8.25 9.75L10.5 12m9-7.243V21.75l-3.75-1.5-3.75 1.5-3.75-1.5-3.75 1.5V4.757c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0c1.1.128 1.907 1.077 1.907 2.185z"
+                            />
+                          </svg> */}
+                      </span>
+                    </h3>
 
                     <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-400 dark:text-gray-400">
                       {item?.overview}
@@ -77,17 +101,12 @@ const Content = () => {
       </div>
 
       <div className="bg-gray-900 dark:bg-gray-900">
-        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mx-auto -mb-6 max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
           <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-200 sm:text-3xl dark:text-white">
                 Popular Movie
               </h1>
-
-              <p className="mt-1.5 text-sm text-gray-400 dark:text-gray-400">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure,
-                recusandae.
-              </p>
             </div>
           </div>
         </div>
@@ -98,6 +117,13 @@ const Content = () => {
           ? popular.map((item: any, key: any) => {
               return (
                 <article
+                  onClick={() =>
+                    navigate(
+                      `/movie/${item?.release_date?.split("-")[0]}/${
+                        item?.id
+                      }/detail`
+                    )
+                  }
                   key={key}
                   className="relative overflow-hidden p-3 rounded-xl shadow transition hover:shadow-lg hover:scale-110 ease-in duration-200"
                 >
@@ -108,9 +134,6 @@ const Content = () => {
                     }`}
                     className="  h-full w-full object-cover"
                   />
-                  <div className="">
-
-                  </div>
                 </article>
               );
             })
@@ -136,7 +159,7 @@ const Content = () => {
                 onClick={() => setPopularPage(popularPage + 1)}
                 className={`${
                   popularPage >= 5 ? "hidden" : ""
-                } inline-block px-4 py-2 text-sm font-medium bg-gray-500 rounded-lg min-w-xl text-gray-800 hover:bg-gray-500 hover:text-gray-200 focus:relative dark:text-gray-200 dark:hover:bg-gray-800`}
+                } inline-block px-4 py-2 text-sm font-medium  bg-gray-500 rounded-lg min-w-xl text-gray-800 hover:bg-gray-500 hover:text-gray-200 focus:relative dark:text-gray-200 dark:hover:bg-gray-800`}
               >
                 {loadingPopular ? "Please Wait..." : "Load more"}
               </button>

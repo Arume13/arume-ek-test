@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const HeroComponent = ({ data }: any) => {
+  const navigate = useNavigate();
   return (
     <>
       <section className="relative pt-20 bg-gradient-to-br from-blue-900 to-indigo-800 text-white overflow-hidden">
@@ -20,12 +23,18 @@ const HeroComponent = ({ data }: any) => {
               </h1>
               <p className="text-xl mb-8 text-gray-300">{data?.overview}</p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                <a
-                  href="#"
+                <div
+                  onClick={() =>
+                    navigate(
+                      `/movie/${data?.release_date?.split("-")[0]}/${
+                        data?.id
+                      }/detail`
+                    )
+                  }
                   className="bg-white text-blue-900 font-semibold px-8 py-3 rounded-full hover:bg-blue-100 transition duration-300 text-center"
                 >
                   Read More
-                </a>
+                </div>
                 {/* <a
                   href="#"
                   className="border-2 border-white text-white font-semibold px-8 py-3 rounded-full hover:bg-white hover:text-blue-900 transition duration-300 text-center"
@@ -96,7 +105,7 @@ const HeroComponent = ({ data }: any) => {
           </div>
         </div>
         {/* Decorative Element */}
-        <div className="sticky -mb-1 ">
+        <div className="absolute  bottom-0 left-0 right-0 bottom-0">
           <svg
             viewBox="0 0 1440 120"
             fill="none"
